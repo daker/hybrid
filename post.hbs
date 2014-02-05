@@ -1,0 +1,89 @@
+{{!< default}}
+
+{{#post}}
+<header id="site-head" {{#if author.cover}}style="background-image: url({{author.cover}})"{{/if}}>
+    <nav id="menu">
+        <a href="{{@blog.url}}"> <i class="fa fa-home fa-fw"></i>
+        </a>
+    </nav>
+
+    {{#if author}}
+    <section class="post-headline">
+        <h1 itemprop="name headline" class="post-title">
+            {{{title}}}
+        </h1>
+    </section>
+    {{/if}}
+</header>
+
+<main class="content">
+    <aside id="sidebar">
+        {{#if author}}
+        <div class="post-author-info">
+            {{#if author.image}}
+            <a href="{{author.website}}" class="post-author-avatar">
+                <img itemprop="image" src="{{author.image}}" alt="{{author.name}}"></a>
+            {{/if}}
+            <div class="post-author-meta">
+                <h4 class="post-author-name">{{author.name}}</h4>
+                <div class="post-pubdate">
+                    published
+                    <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}" itemprop="datePublished">{{date published_at timeago="true"}}</time>
+                </div>
+                {{#if tags}}
+                <div class="post-tags">
+                    in
+                        {{#foreach tags}}
+                    <span itemprop="{{#if @first}}articleSection{{else}}keywords{{/if}}">{{name}}</span>
+                    {{#if @last}}{{else}}, {{/if}}
+                        {{/foreach}}
+                </div>
+                {{/if}}
+            </div>
+
+            <div class="post-share">
+                <h4>Share this post</h4>
+                <ul class="post-share-links">
+                    <li>
+                        <a href="http://twitter.com/share?text={{title}}&url={{url absolute="true"}}"
+                            onclick="window.open(this.href, 'twitter-share', 'width=550, height=235');return false;"> <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}"
+                            onclick="window.open(this.href, 'facebook-share','width=580, height=296');return false;"> <i class="fa fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://plus.google.com/share?url={{url absolute="true"}}"
+                           onclick="window.open(this.href, 'google-plus-share', 'width=490, height=530');return false;">
+                            <i class="fa fa-google-plus-square"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {{/if}}
+    </aside>
+    <section class="posts">
+        {{> post/details this}}
+    </section>
+</main>
+{{/post}}
+
+<script type="text/javascript">
+  {{> custom/config}}
+
+  {{#post}}
+    var disqus_identifier = '{{id}}';
+  {{/post}}
+
+  if(typeof DISQUS !== 'object') {
+    (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+  }
+</script>

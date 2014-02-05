@@ -1,0 +1,19 @@
+<article class="{{post_class}}" class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h2 itemprop="name headline" class="post-title">
+            <a href="{{url}}" itemprop="url" title="{{{title}}}">{{title}}</a>
+        </h2>
+        <div class="post-meta-item">
+            <time class="post-meta-pubdate" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time> —
+            <a class="post-meta-comments" href="{{url}}#disqus_thread" data-disqus-url="{{url}}"></a>
+        </div>
+    </header>
+
+    <section class="post-content">
+        <div class="post-content-inner">
+            <div class="post-field body">
+                <p>{{excerpt}}&hellip;</p>
+            </div>
+        </div>
+    </section>
+</article>
